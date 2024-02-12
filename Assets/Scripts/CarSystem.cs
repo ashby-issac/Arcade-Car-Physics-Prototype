@@ -37,16 +37,6 @@ public class CarSystem : ICarComponents
         GameplayController.Instance.OnCarRotate += CarRotation;
     }
 
-    /*
-     * Apply force for Suspension, Steering, and Acceleration
-     */
-    private void ApplyCarForces(float distance = 0, Transform tireTransform = null, float accelInput = 0)
-    {
-        SuspensionForce(distance, tireTransform);
-        SteeringForce(tireTransform);
-        AccelerationForce(accelInput, tireTransform);
-    }
-
     /* Force that makes the rigidbody float on 
      * the ground using the raycast-based approach */
     public void SuspensionForce(float distance = 0, Transform tireTransform = null)
@@ -84,6 +74,14 @@ public class CarSystem : ICarComponents
             accelForce = carSpecs.AccelSpeed * accelInput * carRigidbody.transform.forward;
             carRigidbody.AddForceAtPosition(accelForce, tireTransform.position);
         }
+    }
+
+    /* Apply force for Suspension, Steering, and Acceleration */
+    private void ApplyCarForces(float distance = 0, Transform tireTransform = null, float accelInput = 0)
+    {
+        SuspensionForce(distance, tireTransform);
+        SteeringForce(tireTransform);
+        AccelerationForce(accelInput, tireTransform);
     }
 
     /* Rotate the front wheel transforms */
