@@ -71,7 +71,7 @@ public class CarSystem : ICarComponents
     {
         if (accelInput != 0.0f)
         {
-            accelForce = carSpecs.AccelSpeed * accelInput * carRigidbody.transform.forward;
+            accelForce = carSpecs.accelSpeed * accelInput * carRigidbody.transform.forward;
             carRigidbody.AddForceAtPosition(accelForce, tireTransform.position);
         }
     }

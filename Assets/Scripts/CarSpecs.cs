@@ -5,15 +5,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CarSpecs", menuName = "CarSpecs", order = 1)]
 public class CarSpecs : ScriptableObject
 {
-    public float dampingForce;
-    public float strength;
-    public float suspensionRestDist = 0.5f;
-    public float hitDist = 0.3f;
-    public float gripFactor = 1f;
-    public float tireMass = 1f;
+    public float dampingForce = 50;
+    public float strength = 500;
+    public float suspensionRestDist = 0.6f;
+    public float hitDist = 0.4f;
+    public float gripFactor = 0.4f;
+    public float tireMass = 2f;
     
-    public float totalSpeed = 10f;
-    public float AccelSpeed = 50f;
+    public float accelSpeed = 70f;
     public float rotationSpeed = 10f;
 
     public float tireRotationAngle = 60f;
