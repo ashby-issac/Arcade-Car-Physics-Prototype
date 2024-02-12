@@ -18,6 +18,6 @@ MonoBehaviour:
   hitDist: 0.4
   gripFactor: 0.4
   tireMass: 2
-  accelSpeed: 60
+  accelSpeed: 55
   rotationSpeed: 3
   tireRotationAngle: 60
