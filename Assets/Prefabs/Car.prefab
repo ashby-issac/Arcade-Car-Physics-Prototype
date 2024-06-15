@@ -142,8 +142,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 0.7641605, z: 1}
-  m_Center: {x: -0, y: 0.11791975, z: 0}
+  m_Size: {x: 1, y: 0.97474486, z: 1}
+  m_Center: {x: 0, y: 0.012627554, z: 0}
 --- !u!54 &1119196523338108277
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -170,7 +170,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &5205286332861951688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,10 +191,95 @@ MonoBehaviour:
   frontTireTransforms:
   - {fileID: 2077921721467072242}
   - {fileID: 3627546307361600806}
+  gameOverPanel: {fileID: 0}
   carRigidbody: {fileID: 1119196523338108277}
+  gameOverText: {fileID: 0}
   timerText: {fileID: 0}
   carSpecs: {fileID: 11400000, guid: 6796f255b20065347a8091c6ba7ae134, type: 2}
-  isDebug: 0
+  steerAnimCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.0000038146973
+      value: 0.8184204
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.4067584
+      value: 0.68978983
+      inSlope: -0.23382907
+      outSlope: -0.23382907
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.15745927
+      outWeight: 0.21655425
+    - serializedVersion: 3
+      time: 0.74734396
+      value: 0.5535164
+      inSlope: -0.6684124
+      outSlope: -0.6684124
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.41760528
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9985962
+      value: 0.051872462
+      inSlope: -0.25300944
+      outSlope: -0.25300944
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.3698726
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  accelAnimCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.38923782
+      value: 0.62846017
+      inSlope: 0.041626453
+      outSlope: 0.041626453
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.64598864
+      value: 0.62498593
+      inSlope: -0.1023519
+      outSlope: -0.1023519
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.24787803
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9985795
+      value: 0.5
+      inSlope: -0.7227527
+      outSlope: -0.7227527
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.31689224
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &2277615318353109989
 GameObject:
   m_ObjectHideFlags: 0

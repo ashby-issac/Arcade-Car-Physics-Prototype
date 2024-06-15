@@ -12,7 +12,7 @@ public class CarSpecs : ScriptableObject
     public float gripFactor = 0.4f;
     public float tireMass = 2f;
     
-    public float accelSpeed = 70f;
+    public float totalSpeed = 20f;
     public float rotationSpeed = 10f;
 
     public float tireRotationAngle = 60f;

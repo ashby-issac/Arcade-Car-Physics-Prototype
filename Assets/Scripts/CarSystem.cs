@@ -9,6 +9,10 @@ public class CarSystem : ICarComponents
     private Rigidbody carRigidbody;
     private CarSpecs carSpecs;
 
+    [Category("Animation Curves")]
+    private AnimationCurve steeringAnimCurve;
+    private AnimationCurve accelAnimCurve;
+
     [Category("SuspensionForce Attributes")]
     private float force;
     private float springOffset;
@@ -27,11 +31,13 @@ public class CarSystem : ICarComponents
 
     private Transform[] frontTireTransforms;
 
-    public CarSystem(Rigidbody carRigidbody = null, CarSpecs carSpecs = null, Transform[] frontTireTransforms = null) 
+    public CarSystem(Rigidbody carRigidbody = null, CarSpecs carSpecs = null, Transform[] frontTireTransforms = null, AnimationCurve steeringAnimCurve = null, AnimationCurve accelAnimCurve = null) 
     {
         this.carRigidbody = carRigidbody;
         this.carSpecs = carSpecs;
         this.frontTireTransforms = frontTireTransforms;
+        this.steeringAnimCurve = steeringAnimCurve;
+        this.accelAnimCurve = accelAnimCurve;
 
         GameplayController.Instance.OnApplyForce += ApplyCarForces;
         GameplayController.Instance.OnCarRotate += CarRotation;
@@ -60,6 +66,10 @@ public class CarSystem : ICarComponents
         tirePointVel = carRigidbody.GetPointVelocity(tireTransform.position);
         steeringVel = Vector3.Dot(tirePointVel, tireTransform.right);
 
+        //var velOnX = Mathf.Abs(Mathf.Clamp01(steeringVel));
+        //var gripFactor = steeringAnimCurve.Evaluate(velOnX);
+        //Debug.Log($":: gripFactor: {gripFactor}");
+
         changeInVel = -steeringVel * carSpecs.gripFactor; 
         accel = changeInVel / Time.fixedDeltaTime;
 
@@ -71,7 +81,12 @@ public class CarSystem : ICarComponents
     {
         if (accelInput != 0.0f)
         {
-            accelForce = carSpecs.accelSpeed * accelInput * carRigidbody.transform.forward;
+            float speed = Vector3.Dot(tireTransform.forward, carRigidbody.velocity);
+            float clampedSpeed = Mathf.Clamp01(speed / carSpecs.totalSpeed);
+
+            var accelSpeed = accelAnimCurve.Evaluate(clampedSpeed) * 100f;
+
+            accelForce = accelSpeed * accelInput * carRigidbody.transform.forward;
             carRigidbody.AddForceAtPosition(accelForce, tireTransform.position);
         }
     }

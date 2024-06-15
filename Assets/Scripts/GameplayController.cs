@@ -2,9 +2,12 @@
 using System;
 using System.Collections;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameplayController : MonoBehaviour
@@ -18,6 +21,9 @@ public class GameplayController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private CarSpecs carSpecs;
 
+    [SerializeField] private AnimationCurve steerAnimCurve;
+    [SerializeField] private AnimationCurve accelAnimCurve;
+
     [Category("Input Attributes")]
     private float steeringInput;
     private float accelInput;
@@ -30,6 +36,7 @@ public class GameplayController : MonoBehaviour
     [Category("Script-Object-Refs.")]
     private CarSystem carSystem;
     private TimerSystem timerSystem;
+    private LevelManager levelManager;
 
     [Category("Tags.")]
     private const string checkpointTag = "Checkpoint";
@@ -48,9 +55,10 @@ public class GameplayController : MonoBehaviour
     public Action<float> OnCheckpointReached;
     public Action<float, Transform, float> OnApplyForce;
     public Action<float> OnCarRotate;
+    public Action<string> OnGameOver;
 
     public static GameplayController Instance;
-    
+
     private void Awake()
     {
         Instance = this;
@@ -64,7 +72,42 @@ public class GameplayController : MonoBehaviour
 
         timerSystem = new TimerSystem();
         remTime = timerSystem.Timer;
-        carSystem = new CarSystem(carRigidbody, carSpecs, frontTireTransforms);
+        carSystem = new CarSystem(carRigidbody, carSpecs, frontTireTransforms, steeringAnimCurve: steerAnimCurve, accelAnimCurve: accelAnimCurve);
+        levelManager = new LevelManager(gameOverText, gameOverPanel);
+
+        PlayerInputAction playerInputAction = new PlayerInputAction();
+        playerInputAction.Player.Enable();
+        playerInputAction.Player.Jump.performed += Jump;
+        playerInputAction.Player.Move.performed += Move;
+    }
+
+    public void Jump(InputAction.CallbackContext context)
+    {
+    }
+
+    private void Move(InputAction.CallbackContext context)
+    {
+        Debug.Log($":: Move");
+        Vector2 inputVec = context.ReadValue<Vector2>();
+        steeringInput = inputVec.x;
+        accelInput = inputVec.y;
+    }
+
+    /* Apply force to Car's rigidbody for Suspension(Y-Axis), 
+       steering(X-Axis), and acceleration(Z-Axis) for each tire. */
+    private void FixedUpdate()
+    {
+        tiresInGround = 0;
+        for (int tireIndex = 0; tireIndex < tiresCount; tireIndex++)
+        {
+            if (Physics.Raycast(tireTransforms[tireIndex].position, -tireTransforms[tireIndex].up, out hitInfo, carSpecs.hitDist))
+            {
+                tiresInGround++;
+                OnApplyForce?.Invoke(hitInfo.distance, tireTransforms[tireIndex], accelInput);
+            }
+        }
+
+        CheckGameOverStates();
     }
 
     // Updates the timer for UI and Rotation of the wheels (transforms) according to input
@@ -83,6 +126,9 @@ public class GameplayController : MonoBehaviour
     // Add additional time when a checkpoint's reached
     private void OnTriggerEnter(Collider other)
     {
+        if (isGameOver)
+            return;
+
         string otherGOTag = other.gameObject.tag;
         if (otherGOTag == checkpointTag)
         {
@@ -90,54 +136,46 @@ public class GameplayController : MonoBehaviour
             remTime = timerSystem.Timer;
         }
         else if (otherGOTag == finishCheckpointTag && remTime > 0)
-            LevelEndPanel(LevelComplete_Text);
+        {
+            EnableGameOverState(LevelComplete_Text);
+        }
+    }
+
+    private void EnableGameOverState(string panelText)
+    {
+        OnGameOver?.Invoke(panelText);
+        isGameOver = true;
     }
 
     private void DisplayUITimer()
     {
         if (remTime < 0) return;
 
-        remTime -= Time.deltaTime;
+        //remTime -= Time.deltaTime;
         timerText.text = ((int)remTime).ToString();
     }
 
     /* Editor movement inputs */
     private void ProcessInputs()
     {
-        accelInput = Input.GetAxis("Vertical");
-        steeringInput = Input.GetAxis("Horizontal");
-    }
-
-    /*
-     * Apply force to Car's rigidbody for Suspension(Y-Axis), 
-     * steering(X-Axis), and acceleration(Z-Axis) for each tire.
-     */
-    private void FixedUpdate()
-    {
-        tiresInGround = 0;
-        for (int tireIndex = 0; tireIndex < tiresCount; tireIndex++)
-        {
-            if (Physics.Raycast(tireTransforms[tireIndex].position, -tireTransforms[tireIndex].up, out hitInfo, carSpecs.hitDist))
-            {
-                tiresInGround++;
-                OnApplyForce?.Invoke(hitInfo.distance, tireTransforms[tireIndex], accelInput);
-            }
-        }
-
-        CheckGameOverStates();
+        //accelInput = Input.GetAxis("Vertical");
+        //steeringInput = Input.GetAxis("Horizontal");
     }
 
     private void CheckGameOverStates()
     {
+        if (isGameOver)
+            return;
+
         /* Check for Time run out */
         if (remTime < 1)
         {
-            LevelEndPanel(OutOfTime_Text);
+            EnableGameOverState(OutOfTime_Text);
             return;
         }
 
         /* Check for Tires out of bounds (ground/platform) */
-        if (tiresInGround < 3 && !isGameOver && GroundCheckCoroutine == null)
+        if (tiresInGround < 3 && GroundCheckCoroutine == null)
             GroundCheckCoroutine = StartCoroutine(CheckTiresInGround());
     }
 
@@ -150,30 +188,15 @@ public class GameplayController : MonoBehaviour
             StopCoroutine();
         }
 
-        /* Second delay is for dealing with edge cases where 
+        /* Check for dealing with edge cases where 
            car would be moving through the edge of the platforms */
         yield return new WaitForSeconds(2f);
 
-        if (tiresInGround < 3)
+        if (tiresInGround < 3 && !isGameOver)
         {
-            LevelEndPanel(GameOver_Text);
+            EnableGameOverState(GameOver_Text);
             StopCoroutine();
         }
-    }
-
-    /*
-     * Activate GameOver Panel when car has:
-     * fallen off, 
-     * or when level's complete 
-     * or when time has run out
-     */
-    private void LevelEndPanel(string text)
-    {
-        if (isGameOver) return;
-
-        gameOverText.text = text;
-        gameOverPanel.SetActive(true);
-        isGameOver = true;
     }
 
     private void StopCoroutine()
