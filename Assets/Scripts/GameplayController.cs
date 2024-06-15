@@ -52,7 +52,7 @@ public class GameplayController : MonoBehaviour
     private Coroutine GroundCheckCoroutine = null;
 
     [Category("Action Delegates")]
-    public Action<float> OnCheckpointReached;
+    public static Action<float> OnCheckpointReached;
     public Action<float, Transform, float> OnApplyForce;
     public Action<float> OnCarRotate;
     public Action<string> OnGameOver;

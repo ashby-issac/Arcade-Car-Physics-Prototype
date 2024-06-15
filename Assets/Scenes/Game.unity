@@ -2187,7 +2187,7 @@ Transform:
   m_GameObject: {fileID: 650111932}
   serializedVersion: 2
   m_LocalRotation: {x: 0.3859712, y: -0.1848002, z: 0.07922355, w: 0.90033257}
-  m_LocalPosition: {x: 2, y: 9.61, z: -3.8}
+  m_LocalPosition: {x: 3.57, y: 9.61, z: -3.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2386,7 +2386,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 35.799988, y: 30}
+  m_AnchoredPosition: {x: 35.80005, y: 30}
   m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &670500948
@@ -2534,7 +2534,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &679571981
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2615,7 +2615,7 @@ Transform:
   m_GameObject: {fileID: 679571980}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -25.1, y: 0, z: 0}
   m_LocalScale: {x: 50, y: 1, z: 50}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2991,7 +2991,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0.3859712, y: -0.1848002, z: 0.07922355, w: 0.90033257}
-  m_LocalPosition: {x: 2, y: 9.61, z: -3.8}
+  m_LocalPosition: {x: 3.57, y: 9.61, z: -3.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5867,7 +5867,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2540520069710532046, guid: c5e68afd58e98014a99efb78109d0c66, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1
+      value: 0.57
       objectReference: {fileID: 0}
     - target: {fileID: 2540520069710532046, guid: c5e68afd58e98014a99efb78109d0c66, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5904,18 +5904,6 @@ PrefabInstance:
     - target: {fileID: 2540520069710532046, guid: c5e68afd58e98014a99efb78109d0c66, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4256637508682406281, guid: c5e68afd58e98014a99efb78109d0c66, type: 3}
-      propertyPath: m_Size.y
-      value: 0.97474486
-      objectReference: {fileID: 0}
-    - target: {fileID: 4256637508682406281, guid: c5e68afd58e98014a99efb78109d0c66, type: 3}
-      propertyPath: m_Center.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4256637508682406281, guid: c5e68afd58e98014a99efb78109d0c66, type: 3}
-      propertyPath: m_Center.y
-      value: 0.012627554
       objectReference: {fileID: 0}
     - target: {fileID: 5205286332861951688, guid: c5e68afd58e98014a99efb78109d0c66, type: 3}
       propertyPath: timerText

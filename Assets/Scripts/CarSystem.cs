@@ -50,7 +50,9 @@ public class CarSystem : ICarComponents
         springDir = tireTransform.up;
         pointVelocity = carRigidbody.GetPointVelocity(tireTransform.position);
 
-        springOffset = carSpecs.suspensionRestDist - distance;
+        Debug.LogError($":: ");
+        
+        springOffset = carSpecs.suspensionRestDist - distance; // 0.2
 
         velocitySpeed = Vector3.Dot(springDir, pointVelocity);
         force = (springOffset * carSpecs.strength) - (velocitySpeed * carSpecs.dampingForce);

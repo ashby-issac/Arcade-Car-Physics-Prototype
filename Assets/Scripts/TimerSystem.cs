@@ -13,7 +13,7 @@ public class TimerSystem
 
     public TimerSystem()
     {
-        GameplayController.Instance.OnCheckpointReached += UpdateTimer;
+        GameplayController.OnCheckpointReached += UpdateTimer;
     }
 
     private void IncreaseTimer()
