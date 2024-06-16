@@ -87,7 +87,6 @@ public class GameplayController : MonoBehaviour
 
     private void Move(InputAction.CallbackContext context)
     {
-        Debug.Log($":: Move");
         Vector2 inputVec = context.ReadValue<Vector2>();
         steeringInput = inputVec.x;
         accelInput = inputVec.y;
