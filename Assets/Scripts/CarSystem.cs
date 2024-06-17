@@ -54,7 +54,7 @@ public class CarSystem : ICarComponents
         // also dependent on the mass of the object.
         force = (springOffset * carSpecs.strength) - (velocitySpeed * carSpecs.dampingForce);
 
-        Debug.LogWarning($":: springOffset: {springOffset} :: velocitySpeed: {velocitySpeed} :: force: {force}");
+        // Debug.LogWarning($":: springOffset: {springOffset} :: velocitySpeed: {velocitySpeed} :: force: {force}");
 
         carRigidbody.AddForceAtPosition(springDir * force, tireTransform.position);
     }
@@ -73,12 +73,13 @@ public class CarSystem : ICarComponents
 
         changeInVel = -steeringVel * carSpecs.gripFactor;
         accel = changeInVel / Time.fixedDeltaTime;
-
-        carRigidbody.AddForceAtPosition(tireTransform.right * accel * carSpecs.tireMass, tireTransform.position);
+        var forceToApply = accel * carSpecs.tireMass;
+        
+        carRigidbody.AddForceAtPosition(tireTransform.right * forceToApply, tireTransform.position);
     }
 
     /* Forward/Backward force for the car's rigidbody */
-    public void AccelerationForce(float accelInput = 0, Transform tireTransform = null)
+    public void AccelerationForce(float accelInput = 0, Transform tireTransform = null, Transform tireMesh = null)
     {
         if (accelInput != 0.0f)
         {
@@ -89,15 +90,17 @@ public class CarSystem : ICarComponents
 
             accelForce = accelSpeed * accelInput * carRigidbody.transform.forward;
             carRigidbody.AddForceAtPosition(accelForce, tireTransform.position);
+            
+            tireMesh.Rotate(Vector3.right, accelSpeed);
         }
     }
 
     /* Apply force for Suspension, Steering, and Acceleration */
-    private void ApplyCarForces(float distance = 0, Transform tireTransform = null, float accelInput = 0)
+    private void ApplyCarForces(float distance = 0, Transform tireTransform = null, float accelInput = 0, Transform tireMesh = null)
     {
         SuspensionForce(distance, tireTransform);
         SteeringForce(tireTransform);
-        AccelerationForce(accelInput, tireTransform);
+        AccelerationForce(accelInput, tireTransform, tireMesh);
     }
 
     /* Rotate the front wheel transforms */

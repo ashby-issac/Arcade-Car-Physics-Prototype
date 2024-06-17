@@ -14,13 +14,15 @@ public class GameplayController : MonoBehaviour
 {
     [SerializeField] private Transform[] tireTransforms;
     [SerializeField] private Transform[] frontTireTransforms;
-    [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private Transform[] tireMeshes;
+        
     [SerializeField] private Rigidbody carRigidbody;
 
+    [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private TextMeshProUGUI gameOverText;
     [SerializeField] private TextMeshProUGUI timerText;
-    [SerializeField] private CarSpecs carSpecs;
 
+    [SerializeField] private CarSpecs carSpecs;
     [SerializeField] private AnimationCurve steerAnimCurve;
     [SerializeField] private AnimationCurve accelAnimCurve;
 
@@ -53,7 +55,7 @@ public class GameplayController : MonoBehaviour
 
     [Category("Action Delegates")]
     public static Action<float> OnCheckpointReached;
-    public Action<float, Transform, float> OnApplyForce;
+    public Action<float, Transform, float, Transform> OnApplyForce;
     public Action<float> OnCarRotate;
     public Action<string> OnGameOver;
 
@@ -86,7 +88,7 @@ public class GameplayController : MonoBehaviour
             if (Physics.Raycast(tireTransforms[tireIndex].position, -tireTransforms[tireIndex].up, out hitInfo, carSpecs.hitDist))
             {
                 tiresInGround++;
-                OnApplyForce?.Invoke(hitInfo.distance, tireTransforms[tireIndex], accelInput);
+                OnApplyForce?.Invoke(hitInfo.distance, tireTransforms[tireIndex], accelInput, tireMeshes[tireIndex]);
             }
         }
 

@@ -16,8 +16,8 @@ MonoBehaviour:
   strength: 700
   suspensionRestDist: 0.6
   hitDist: 0.4
-  gripFactor: 0.3
-  tireMass: 3
+  gripFactor: 0.2
+  tireMass: 5
   totalSpeed: 10
   rotationSpeed: 2
   tireRotationAngle: 40
