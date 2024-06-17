@@ -74,22 +74,6 @@ public class GameplayController : MonoBehaviour
         remTime = timerSystem.Timer;
         carSystem = new CarSystem(carRigidbody, carSpecs, frontTireTransforms, steeringAnimCurve: steerAnimCurve, accelAnimCurve: accelAnimCurve);
         levelManager = new LevelManager(gameOverText, gameOverPanel);
-
-        PlayerInputAction playerInputAction = new PlayerInputAction();
-        playerInputAction.Player.Enable();
-        playerInputAction.Player.Jump.performed += Jump;
-        playerInputAction.Player.Move.performed += Move;
-    }
-
-    public void Jump(InputAction.CallbackContext context)
-    {
-    }
-
-    private void Move(InputAction.CallbackContext context)
-    {
-        Vector2 inputVec = context.ReadValue<Vector2>();
-        steeringInput = inputVec.x;
-        accelInput = inputVec.y;
     }
 
     /* Apply force to Car's rigidbody for Suspension(Y-Axis), 
@@ -114,6 +98,9 @@ public class GameplayController : MonoBehaviour
     {
         if (isGameOver || remTime < 1)
             return;
+
+        steeringInput = Input.GetAxis("Horizontal");
+        accelInput = Input.GetAxis("Vertical");
 
 #if UNITY_EDITOR
         ProcessInputs();
@@ -142,6 +129,7 @@ public class GameplayController : MonoBehaviour
 
     private void EnableGameOverState(string panelText)
     {
+        return;
         OnGameOver?.Invoke(panelText);
         isGameOver = true;
     }
@@ -193,7 +181,7 @@ public class GameplayController : MonoBehaviour
 
         if (tiresInGround < 3 && !isGameOver)
         {
-            EnableGameOverState(GameOver_Text);
+            // EnableGameOverState(GameOver_Text);
             StopCoroutine();
         }
     }
@@ -209,7 +197,11 @@ public class GameplayController : MonoBehaviour
 
     /* Functions mapped to event triggers of associated buttons */
     public void MoveInput(float input) => accelInput = input;
-    public void SteerInput(float input) => steeringInput = input;
+    public void SteerInput(float input)
+    {
+        steeringInput = input;
+        Debug.LogWarning($":: SteeringInput: {steeringInput}");
+    }
 
     public void RestartLevel()
     {

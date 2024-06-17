@@ -1999,8 +1999,8 @@ MonoBehaviour:
   m_LookaheadIgnoreY: 0
   m_HorizontalDamping: 0.5
   m_VerticalDamping: 0.5
-  m_ScreenX: 0.5
-  m_ScreenY: 0.5
+  m_ScreenX: 0.28
+  m_ScreenY: 0.73
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
   m_SoftZoneWidth: 0.8
@@ -2021,7 +2021,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 3, y: 8, z: -7}
+  m_FollowOffset: {x: 3.29, y: 5.72, z: -5.63}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -2162,11 +2162,11 @@ MonoBehaviour:
   m_LookAt: {fileID: 643031254}
   m_Follow: {fileID: 643031254}
   m_Lens:
-    FieldOfView: 60.000004
+    FieldOfView: 70
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
-    Dutch: 0
+    Dutch: 9
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
@@ -2188,8 +2188,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 650111932}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.3859712, y: -0.1848002, z: 0.07922356, w: 0.90033257}
-  m_LocalPosition: {x: 3.57, y: 9.246, z: -3.8}
+  m_LocalRotation: {x: 0.20279717, y: -0.013578627, z: 0.0028124233, w: 0.9791226}
+  m_LocalPosition: {x: -39.91, y: 7.5, z: -2.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2966,7 +2966,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60.000004
+  field of view: 70
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -2992,8 +2992,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.3859712, y: -0.1848002, z: 0.07922356, w: 0.90033257}
-  m_LocalPosition: {x: 3.57, y: 9.246, z: -3.8}
+  m_LocalRotation: {x: 0.20110665, y: -0.029448053, z: 0.07962483, w: 0.9758836}
+  m_LocalPosition: {x: -39.91, y: 7.5, z: -2.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4483,7 +4483,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1483616901
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6130,11 +6130,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2540520069710532046, guid: c5e68afd58e98014a99efb78109d0c66, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.57
+      value: -43.2
       objectReference: {fileID: 0}
     - target: {fileID: 2540520069710532046, guid: c5e68afd58e98014a99efb78109d0c66, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.246
+      value: 1.78
       objectReference: {fileID: 0}
     - target: {fileID: 2540520069710532046, guid: c5e68afd58e98014a99efb78109d0c66, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6180,54 +6180,6 @@ PrefabInstance:
       propertyPath: gameOverPanel
       value: 
       objectReference: {fileID: 1952290344}
-    - target: {fileID: 5205286332861951688, guid: c5e68afd58e98014a99efb78109d0c66, type: 3}
-      propertyPath: accelAnimCurve.m_Curve.Array.data[1].time
-      value: 0.340959
-      objectReference: {fileID: 0}
-    - target: {fileID: 5205286332861951688, guid: c5e68afd58e98014a99efb78109d0c66, type: 3}
-      propertyPath: accelAnimCurve.m_Curve.Array.data[2].time
-      value: 0.58919543
-      objectReference: {fileID: 0}
-    - target: {fileID: 5205286332861951688, guid: c5e68afd58e98014a99efb78109d0c66, type: 3}
-      propertyPath: accelAnimCurve.m_Curve.Array.data[3].time
-      value: 0.85508585
-      objectReference: {fileID: 0}
-    - target: {fileID: 5205286332861951688, guid: c5e68afd58e98014a99efb78109d0c66, type: 3}
-      propertyPath: accelAnimCurve.m_Curve.Array.data[1].value
-      value: 0.45628634
-      objectReference: {fileID: 0}
-    - target: {fileID: 5205286332861951688, guid: c5e68afd58e98014a99efb78109d0c66, type: 3}
-      propertyPath: accelAnimCurve.m_Curve.Array.data[2].value
-      value: 0.27357602
-      objectReference: {fileID: 0}
-    - target: {fileID: 5205286332861951688, guid: c5e68afd58e98014a99efb78109d0c66, type: 3}
-      propertyPath: accelAnimCurve.m_Curve.Array.data[3].value
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5205286332861951688, guid: c5e68afd58e98014a99efb78109d0c66, type: 3}
-      propertyPath: accelAnimCurve.m_Curve.Array.data[1].inSlope
-      value: -0.33408678
-      objectReference: {fileID: 0}
-    - target: {fileID: 5205286332861951688, guid: c5e68afd58e98014a99efb78109d0c66, type: 3}
-      propertyPath: accelAnimCurve.m_Curve.Array.data[2].inSlope
-      value: -0.92219895
-      objectReference: {fileID: 0}
-    - target: {fileID: 5205286332861951688, guid: c5e68afd58e98014a99efb78109d0c66, type: 3}
-      propertyPath: accelAnimCurve.m_Curve.Array.data[1].outSlope
-      value: -0.33408678
-      objectReference: {fileID: 0}
-    - target: {fileID: 5205286332861951688, guid: c5e68afd58e98014a99efb78109d0c66, type: 3}
-      propertyPath: accelAnimCurve.m_Curve.Array.data[2].outSlope
-      value: -0.92219895
-      objectReference: {fileID: 0}
-    - target: {fileID: 5205286332861951688, guid: c5e68afd58e98014a99efb78109d0c66, type: 3}
-      propertyPath: accelAnimCurve.m_Curve.Array.data[1].outWeight
-      value: 0.3241463
-      objectReference: {fileID: 0}
-    - target: {fileID: 5205286332861951688, guid: c5e68afd58e98014a99efb78109d0c66, type: 3}
-      propertyPath: accelAnimCurve.m_Curve.Array.data[2].outWeight
-      value: 0.27889994
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

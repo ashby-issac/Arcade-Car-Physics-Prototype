@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feb483b279f838c4980e44e0bce6fc87, type: 3}
   m_Name: CarSpecs
   m_EditorClassIdentifier: 
-  dampingForce: 50
-  strength: 500
+  dampingForce: 100
+  strength: 700
   suspensionRestDist: 0.6
   hitDist: 0.4
   gripFactor: 0.3
-  tireMass: 6
+  tireMass: 3
   totalSpeed: 10
   rotationSpeed: 2
-  tireRotationAngle: 50
+  tireRotationAngle: 40
+  speedValue: 1000

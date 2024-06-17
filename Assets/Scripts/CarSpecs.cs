@@ -16,4 +16,5 @@ public class CarSpecs : ScriptableObject
     public float rotationSpeed = 10f;
 
     public float tireRotationAngle = 60f;
+    public float speedValue = 300f;
 }
